@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exemplo de Carregamento de Dados</title>
+</head>
+<body>
+  <div id="cards-container">
+    <!-- Os dados da API serão exibidos aqui -->
+    <img src="" alt="">
+  </div>
+
+  <script>
+    fetch('/cards')
+      .then(response => response.json())
+      .then(data => {
+        const cardsContainer = document.getElementById('cards-container');
+        data.forEach(cardData => {
+          const card = document.createElement('div');
+          card.innerHTML = `
+            <img src="${cardData.url_foto}">
+            <h2>${cardData.Titulo}</h2>
+            <p> Diretor: ${cardData.diretor}</p>
+            <p> Ano: ${cardData.Ano}</p>
+            <p> Sinopse: ${cardData.sinopse}</p>
+            <p> Nota: ${cardData.nota}</p>
+          `;
+          cardsContainer.appendChild(card);
+        });
+      })
+      .catch(error => {
+        console.error('Erro ao buscar dados da API:', error);
+      });
+  </script>
+</body>
+</html>

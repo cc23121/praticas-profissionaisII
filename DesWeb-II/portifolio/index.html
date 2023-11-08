@@ -6,141 +6,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>WDSAWDSA</title>
+    <link rel="Script" href="Script.js">
+    <title>CineCritique</title>
 </head>
 
 <body>
+    
     <nav>
         <div class="nav-logo">
+        
         </div>
         <ul class="nav-links">
-            <li class="link"><a href="#">Listagem de Filmes</a></li>
-            <li id="link1" class="link"><a href="#"></a></li>
+            <li class="link" onclick="irParaALista()"><a href="#">Listagem de Filmes</a></li>
+            <li id="link1" class="link" onclick="irParaRedesSociais()"><a href="#">Redes Sociais</a></li>
         </ul>
-        <button class="btn">Login</button>
+        <a href="ColocarOCaminhoDevido"><button class="btn">Login</button></a> 
     </nav>
+
 
     <header class="container">
         <div class="content">
             <span class="blur"></span>
             <span class="blur"></span>
-            <H1>CineCritique</H1>
+            <H1>Bem-vindo ao CineCritique!</H1>
             <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus rem eos aliquid quo rerum
-                temporibus ipsum distinctio numquam ut omnis placeat, nam sint atque quos dolorem laborum? Rerum, esse
-                dolorem.
-            </p>
-            <button class="btn">awdsa</button>
+                CineCritique é o seu destino online para avaliar e comparar a média das notas dos filmes. Nossa missão é fornecer a você informações precisas e atualizadas sobre a qualidade dos filmes que você ama. Explore nosso catálogo, compartilhe suas opiniões e descubra as melhores críticas. Seja um cinéfilo informado e faça parte da nossa comunidade apaixonada por cinema. Junte-se a nós e comece a sua jornada de descoberta cinematográfica hoje!
+            </p> <br>        
+            <button class="btn" onclick="irParaALista()">Começar!</button>
         </div>
     </header>
-
-    <section class="container">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+    <section class="Cards">
         <h2 class="header">Lista de Filmes</h2>
+
         <div class="filmes">
-            <div class="card">
-                <h4>Fix Your Bugs</h4>
-                <p>
-                    You have any problem in your codes? Tell me, i will help you fix it.
-                </p>
-                <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
-            </div>
-            <div class="card">
-                <h4>On Time Videos</h4>
-                <p>
-                    We have video each 4 days, So check channel every 4 days to watch it!
-                </p>
-            </div>
-            <div class="card">
-                <h4>Cooperation</h4>
-                <p>
-                    You want we worrk together? Write email to us, we will read it.
-                </p>
-            </div>
-        </div>
-    </section>
+            
+             <div class="card">
+                <h4>Titulo do Filme</h4>
+                <img src="https://cdn-8.motorsport.com/images/amp/6DlkBn46/s6/general-carros-3-2017-cena-de-carros-3.jpg">
+                
+                <p id="sinopse">Sinopse:</p>
+                <label for="sinopse">Texto da Sinopse</label>
+                
+                <p id="diretor">Diretor:</p>
+                <label for="diretor">Nome do Diretor</label>
 
-    <section class="container">
-        <h2 class="header">PROJECT PRICING PLANS</h2>
-        <p class="sub-header">
-            Our pricing plans come with various membership tiers, each tailored to cater to different projects and
-            class+ code types.
-        </p>
-        <div class="pricing">
-            <div class="card">
-                <div class="content">
-                    <h4>Basic Plan</h4>
-                    <h3>0$</h3>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Smart coding plan
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        At home workouts
-                    </p>
+                <p>Ano Lançamento:</p>
+                <label for="ano">2023</label>
+                
+                <p>Nota:</p>
+                <label for="nota">5</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
                 </div>
-                <button class="btn">Join Now</button>
+           
             </div>
             <div class="card">
-                <div class="content">
-                    <h4>Gold Plan</h4>
-                    <h3>10$</h3>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Pro codes
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Smart coding plan
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        At home workouts
-                    </p>
-                </div>
-                <button class="btn">Join Now</button>
-            </div>
-            <div class="card">
-                <div class="content">
-                    <h4>Diamond Plan</h4>
-                    <h3>100$</h3>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Elite Classes & Courses
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Pro codes
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Personal Coaching
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        Smart coding plan
-                    </p>
-                    <p>
-                        <i class="ri-checkbox-circle-line"></i>
-                        At home workouts
-                    </p>
-                </div>
-                <button class="btn">Join Now</button>
-            </div>
-        </div>
-    </section>
+                <h4>Titulo do Filme</h4>
+                <img src="https://cdn-8.motorsport.com/images/amp/6DlkBn46/s6/general-carros-3-2017-cena-de-carros-3.jpg">
+                
+                <p id="sinopse">Sinopse:</p>
+                <label for="sinopse">Texto da Sinopse</label>
+                
+                <p id="diretor">Diretor:</p>
+                <label for="diretor">Nome do Diretor</label>
 
-    <footer class="container">
+                <p>Ano Lançamento:</p>
+                <label for="ano">2023</label>
+                
+                <p>Nota:</p>
+                <label for="nota">5</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                </div>
+            </div>
+            
+            
+            <div class="card">
+                <h4>Titulo do Filme</h4>
+                <img src="https://cdn-8.motorsport.com/images/amp/6DlkBn46/s6/general-carros-3-2017-cena-de-carros-3.jpg">
+                
+                <p id="sinopse">Sinopse:</p>
+                <label for="sinopse">Texto da Sinopse</label>
+                
+                <p id="diretor">Diretor:</p>
+                <label for="diretor">Nome do Diretor</label>
+
+                <p>Ano Lançamento:</p>
+                <label for="ano">2023</label>
+                
+                <p>Nota:</p>
+                <label for="nota">5</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                </div>
+            
+            
+            </div>
+           
+           
+            <div class="card">
+                <h4>Belligol</h4>
+                <img src="https://www.umdoisesportes.com.br/media/umdoisesportes/2023/10/30181141/Jude-Bellingham.jpg">
+                
+                <p id="sinopse">Sinopse:</p>
+                <label for="sinopse">Bellingham</label>
+                
+                <p id="diretor">Diretor:</p>
+                <label for="diretor">É ELE!!!</label>
+
+                <p>Ano Lançamento:</p>
+                <label for="ano">2023</label>
+                
+                <p>Nota:</p>
+                <label for="nota">5</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4>Belligol</h4>
+                <img src="https://www.umdoisesportes.com.br/media/umdoisesportes/2023/10/30181141/Jude-Bellingham.jpg">
+                
+                <p id="sinopse">Sinopse:</p>
+                <label for="sinopse">Bellingham</label>
+                
+                <p id="diretor">Diretor:</p>
+                <label for="diretor">É ELE!!!</label>
+
+                <p>Ano Lançamento:</p>
+                <label for="ano">2023</label>
+                
+                <p>Nota:</p>
+                <label for="nota">5</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                </div>
+            </div>
+
+            </div>
+            
+</div>
+            
+
+ </section>
+
+ <button class="fix-button" onclick="irParaTopo()">
+    <i class="ri-arrow-up-line"></i>
+</button>
+    
+<footer class="container">
         <span class="blur"></span>
         <span class="blur"></span>
         <div class="column">
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Redes Sociais dos criadores da plataforma!
             </p>
             <div class="socials">
-                <a href="#"><i class="ri-youtube-line"></i></a>
-                <a href="#"><i class="ri-instagram-line"></i></a>
-                <a href="#"><i class="ri-twitter-line"></i></a>
+                <a href="https://www.instagram.com/aldoestima/"><i class="ri-instagram-line"></i></a>
+                <a href="https://www.instagram.com/lxma_777/"><i class="ri-instagram-line"></i></a>
             </div>
         </div>
     </footer>

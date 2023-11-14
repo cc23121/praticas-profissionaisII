@@ -10,7 +10,6 @@ import java.util.List;
 public class FilmeCRUD extends JFrame {
     private final Connection connection; // Variável de instância para a conexão JDBC
 
-
     private final List<Filme> filmes;
     private DefaultListModel<String> listModel; //entender como funciona o array de string
     private final JList<String> filmeList;
@@ -20,6 +19,8 @@ public class FilmeCRUD extends JFrame {
     private final JTextField anoTextField;
     private final JTextArea sinopseTextArea;
     private final JTextField notaTextField;
+    //private final JTextField urlFotoTextField;
+
 
     public FilmeCRUD(Connection connection) { //contrutor
         super("Administração de Filmes");
@@ -80,6 +81,8 @@ public class FilmeCRUD extends JFrame {
         formularioPanel.add(new JScrollPane(sinopseTextArea = new JTextArea()));
         formularioPanel.add(new JLabel("Nota:"));
         formularioPanel.add(notaTextField = new JTextField());
+        //formularioPanel.add(new JLabel("Url Foto:"));
+        //formularioPanel.add(urlFotoTextField = new JTextField());
 
         setLayout(new BorderLayout());
         add(new JScrollPane(filmeList), BorderLayout.WEST);
@@ -95,6 +98,8 @@ public class FilmeCRUD extends JFrame {
         atualizarListModel();
     }
 
+
+
     public void dados(){
         String sql = "SELECT * FROM testeFilme.filme"; // Consulta SQL para selecionar todos os registros
 
@@ -107,12 +112,14 @@ public class FilmeCRUD extends JFrame {
                 int ano = resultSet.getInt("Ano");
                 String sinopse = resultSet.getString("Sinopse");
                 float nota = resultSet.getFloat("Nota");
+                //String urlFoto = resultSet.getString("url_foto");
+
 
                 // Crie um objeto Filme com os dados do registro atual
                 Filme filme = new Filme(idFilme, titulo, diretor, ano, sinopse, nota);
 
                 // Adicione o objeto Filme à lista de filmes
-                filmes.add(filme);
+                .                filmes.add(filme);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,18 +155,20 @@ public class FilmeCRUD extends JFrame {
         int ano = Integer.parseInt(anoTextField.getText());
         String sinopse = sinopseTextArea.getText();
         float nota = Float.parseFloat(notaTextField.getText());
+        //String urlFoto = urlFotoTextField.getText();
 
         Filme filme = new Filme(titulo, diretor, ano, sinopse, nota);
         filmes.add(filme);
 
 
-        String sql = "INSERT INTO testeFilme.filme (Titulo, diretor, Ano, Sinopse, Nota) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO testeFilme.filme (Titulo, diretor, Ano, Sinopse, Nota, url_foto) VALUES (?, ?, ?, ?, ?,?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, titulo);
             statement.setString(2, diretor);
             statement.setInt(3, ano);
             statement.setString(4, sinopse);
             statement.setFloat(5, nota);
+            statement.setFloat(6, nota);
             statement.executeUpdate();
 
             System.out.println("Adicionadinho com sucesso");
@@ -190,6 +199,7 @@ public class FilmeCRUD extends JFrame {
                             resultSet.getInt("Ano"),
                             resultSet.getString("Sinopse"),
                             resultSet.getFloat("Nota")
+                            //resultSet.getString("url_foto")
                     );
                     tituloTextField.setText(filmeSelecionado.getTitulo());
                     diretorTextField.setText(filmeSelecionado.getDiretor());

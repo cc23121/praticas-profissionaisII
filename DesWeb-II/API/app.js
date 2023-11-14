@@ -21,6 +21,7 @@ app.get('/cards', (req, res) => {
   });
 });
 
+
 app.listen(port, () => {
   console.log(`Servidor REST API rodando na porta ${port}`);
 });

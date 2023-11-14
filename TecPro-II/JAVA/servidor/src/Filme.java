@@ -8,8 +8,10 @@ public class Filme {
         private int anoLancamento;
         private String sinopse;
         private float nota;
+        //private String urlFoto;
 
-        public Filme(String titulo, String diretor, int anoLancamento, String sinopse, float nota) {
+
+        public Filme(String titulo, String diretor, int anoLancamento, String sinopse, float nota/*, String urlFoto*/) {
             this.titulo = titulo;
             this.diretor = diretor;
             if (anoLancamento <= LocalDate.now().getYear()){
@@ -19,9 +21,10 @@ public class Filme {
             if (nota <= 10 || nota >= 0){
                 this.nota = nota;
             }
-
+            //this.urlFoto = urlFoto;
         }
-        public Filme(int idFilme, String titulo, String diretor, int anoLancamento, String sinopse, float nota) {
+
+        public Filme(int idFilme, String titulo, String diretor, int anoLancamento, String sinopse, float nota/*String urlFoto*/) {
             this.idFilme = idFilme;
             this.titulo = titulo;
             this.diretor = diretor;
@@ -32,6 +35,7 @@ public class Filme {
             if (nota <= 10 || nota >= 0){
                 this.nota = nota;
             }
+            //this.urlFoto = urlFoto;
 
         }
 
@@ -72,7 +76,15 @@ public class Filme {
             return sinopse;
         }
 
-        public void setSinopse(String sinopse) {
+        /*public String getUrlFoto() {
+            return urlFoto;
+        }
+
+        public void setUrlFoto(String urlFoto) {
+            this.urlFoto = urlFoto;
+        }*/
+
+    public void setSinopse(String sinopse) {
             this.sinopse = sinopse;
         }
 

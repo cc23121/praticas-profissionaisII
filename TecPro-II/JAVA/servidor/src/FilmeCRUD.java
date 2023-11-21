@@ -10,6 +10,7 @@ import java.util.List;
 public class FilmeCRUD extends JFrame {
     private final Connection connection; // Variável de instância para a conexão JDBC
 
+
     private final List<Filme> filmes;
     private DefaultListModel<String> listModel; //entender como funciona o array de string
     private final JList<String> filmeList;
@@ -19,8 +20,8 @@ public class FilmeCRUD extends JFrame {
     private final JTextField anoTextField;
     private final JTextArea sinopseTextArea;
     private final JTextField notaTextField;
-    //private final JTextField urlFotoTextField;
 
+    private final JTextField urlFotoTextField;
 
     public FilmeCRUD(Connection connection) { //contrutor
         super("Administração de Filmes");
@@ -81,8 +82,10 @@ public class FilmeCRUD extends JFrame {
         formularioPanel.add(new JScrollPane(sinopseTextArea = new JTextArea()));
         formularioPanel.add(new JLabel("Nota:"));
         formularioPanel.add(notaTextField = new JTextField());
-        //formularioPanel.add(new JLabel("Url Foto:"));
-        //formularioPanel.add(urlFotoTextField = new JTextField());
+
+        formularioPanel.add(new JLabel("Url Foto:"));
+        formularioPanel.add(urlFotoTextField = new JTextField());
+
 
         setLayout(new BorderLayout());
         add(new JScrollPane(filmeList), BorderLayout.WEST);
@@ -98,10 +101,8 @@ public class FilmeCRUD extends JFrame {
         atualizarListModel();
     }
 
-
-
     public void dados(){
-        String sql = "SELECT * FROM testeFilme.filme"; // Consulta SQL para selecionar todos os registros
+        String sql = "SELECT * FROM PRATICAS2.filme"; // Consulta SQL para selecionar todos os registros
 
         try (PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
@@ -112,14 +113,13 @@ public class FilmeCRUD extends JFrame {
                 int ano = resultSet.getInt("Ano");
                 String sinopse = resultSet.getString("Sinopse");
                 float nota = resultSet.getFloat("Nota");
-                //String urlFoto = resultSet.getString("url_foto");
 
-
+                String urlFoto = resultSet.getString("url_foto");
                 // Crie um objeto Filme com os dados do registro atual
-                Filme filme = new Filme(idFilme, titulo, diretor, ano, sinopse, nota);
+                Filme filme = new Filme(idFilme, titulo, diretor, ano, sinopse, nota, urlFoto);
 
                 // Adicione o objeto Filme à lista de filmes
-                .                filmes.add(filme);
+                filmes.add(filme);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +130,7 @@ public class FilmeCRUD extends JFrame {
     private void atualizarListModel() {
         DefaultListModel<String> newListModel = new DefaultListModel<>();
 
-        String sql = "SELECT Titulo FROM testeFilme.filme";
+        String sql = "SELECT Titulo FROM PRATICAS2.filme";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -155,20 +155,21 @@ public class FilmeCRUD extends JFrame {
         int ano = Integer.parseInt(anoTextField.getText());
         String sinopse = sinopseTextArea.getText();
         float nota = Float.parseFloat(notaTextField.getText());
-        //String urlFoto = urlFotoTextField.getText();
 
-        Filme filme = new Filme(titulo, diretor, ano, sinopse, nota);
+        String url_foto = urlFotoTextField.getText();
+
+        Filme filme = new Filme(titulo, diretor, ano, sinopse, nota, url_foto);
         filmes.add(filme);
 
 
-        String sql = "INSERT INTO testeFilme.filme (Titulo, diretor, Ano, Sinopse, Nota, url_foto) VALUES (?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO PRATICAS2.filme (Titulo, diretor, Ano, Sinopse, Nota, url_foto) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, titulo);
             statement.setString(2, diretor);
             statement.setInt(3, ano);
             statement.setString(4, sinopse);
             statement.setFloat(5, nota);
-            statement.setFloat(6, nota);
+            statement.setString(6, url_foto);
             statement.executeUpdate();
 
             System.out.println("Adicionadinho com sucesso");
@@ -186,7 +187,7 @@ public class FilmeCRUD extends JFrame {
 
         Filme filmeSelecionado = filmes.get(selectedIndex); // Obtenha o filme selecionado da lista
         int idFilme = filmeSelecionado.getIdFilme(); // Obtenha o ID do filme selecionado
-        String sql = "SELECT * FROM testeFilme.filme WHERE idFilme = ?";
+        String sql = "SELECT * FROM PRATICAS2.filme WHERE idFilme = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idFilme);
@@ -198,14 +199,15 @@ public class FilmeCRUD extends JFrame {
                             resultSet.getString("diretor"),
                             resultSet.getInt("Ano"),
                             resultSet.getString("Sinopse"),
-                            resultSet.getFloat("Nota")
-                            //resultSet.getString("url_foto")
+                            resultSet.getFloat("Nota"),
+                            resultSet.getString("url_foto")
                     );
                     tituloTextField.setText(filmeSelecionado.getTitulo());
                     diretorTextField.setText(filmeSelecionado.getDiretor());
                     anoTextField.setText(Integer.toString(filmeSelecionado.getAnoLancamento()));
                     sinopseTextArea.setText(filmeSelecionado.getSinopse());
                     notaTextField.setText(Float.toString(filmeSelecionado.getNota()));
+                    urlFotoTextField.setText(filmeSelecionado.getUrl_foto());
                 }
             }
         }
@@ -221,7 +223,7 @@ public class FilmeCRUD extends JFrame {
         Filme filmeSelecionado = filmes.get(selectedIndex);
         int idFilme = filmeSelecionado.getIdFilme();
 
-        String sql = "DELETE FROM testeFilme.filme  WHERE idFilme = ?";
+        String sql = "DELETE FROM PRATICAS2.filme  WHERE idFilme = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idFilme);
             statement.executeUpdate();
@@ -237,23 +239,22 @@ public class FilmeCRUD extends JFrame {
         anoTextField.setText("");
         sinopseTextArea.setText("");
         notaTextField.setText("");
+        urlFotoTextField.setText("");
         filmeList.clearSelection();
     }
 
     public static void main(String[] args) {
         Connection connection = null;
 
-        // Tente estabelecer a conexão JDBC
         final String URL = "jdbc:sqlserver://regulus.cotuca.unicamp.br:1433;database=BD23121;user=BD23121;password=BD23121;encrypt=true;trustServerCertificate=true";
         try {
             connection = DriverManager.getConnection(URL);
             System.out.println("Conexão estabelecida com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.exit(1); // Encerre o programa se a conexão falhar
+            System.exit(1);
         }
 
-        // Inicie a interface gráfica
         Connection finalConnection = connection;
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

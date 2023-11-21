@@ -8,10 +8,9 @@ public class Filme {
         private int anoLancamento;
         private String sinopse;
         private float nota;
-        //private String urlFoto;
+        private String url_foto;
 
-
-        public Filme(String titulo, String diretor, int anoLancamento, String sinopse, float nota/*, String urlFoto*/) {
+        public Filme(String titulo, String diretor, int anoLancamento, String sinopse, float nota,  String url_foto) {
             this.titulo = titulo;
             this.diretor = diretor;
             if (anoLancamento <= LocalDate.now().getYear()){
@@ -21,10 +20,10 @@ public class Filme {
             if (nota <= 10 || nota >= 0){
                 this.nota = nota;
             }
-            //this.urlFoto = urlFoto;
-        }
+            this.url_foto = url_foto;
 
-        public Filme(int idFilme, String titulo, String diretor, int anoLancamento, String sinopse, float nota/*String urlFoto*/) {
+        }
+        public Filme(int idFilme, String titulo, String diretor, int anoLancamento, String sinopse, float nota, String url_foto) {
             this.idFilme = idFilme;
             this.titulo = titulo;
             this.diretor = diretor;
@@ -35,7 +34,7 @@ public class Filme {
             if (nota <= 10 || nota >= 0){
                 this.nota = nota;
             }
-            //this.urlFoto = urlFoto;
+            this.url_foto = url_foto;
 
         }
 
@@ -76,15 +75,7 @@ public class Filme {
             return sinopse;
         }
 
-        /*public String getUrlFoto() {
-            return urlFoto;
-        }
-
-        public void setUrlFoto(String urlFoto) {
-            this.urlFoto = urlFoto;
-        }*/
-
-    public void setSinopse(String sinopse) {
+        public void setSinopse(String sinopse) {
             this.sinopse = sinopse;
         }
 
@@ -93,7 +84,15 @@ public class Filme {
             return nota;
         }
 
-        public void setNota(float nota) {
+    public String getUrl_foto() {
+        return url_foto;
+    }
+
+    public void setUrl_foto(String url_foto) {
+        this.url_foto = url_foto;
+    }
+
+    public void setNota(float nota) {
             this.nota = nota;
         }
 

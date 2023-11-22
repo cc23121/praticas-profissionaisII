@@ -1,3 +1,32 @@
+<script>
+function logar(){
+    const email = document.querySelector("#email").value;
+    const senha  = document.querySelector("#senha").value;
+    dados = {
+        email: email,
+        senha: senha
+    }
+
+    console.log(dados)
+
+    fetch('/login', {
+        method:'POST', 
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(Response => Response.json)
+    .then(data => {
+        window.location.replace('/')
+        console.log('Resposta da API', data)
+    })
+    .catch(error => {
+        console.error('Erro ao buscar dados da API:', error);
+    });
+}
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +74,7 @@
                 </div>
             </div>
 
-            <button type="submit" id="login_button">
+            <button onclick="logar()" type="submit" id="login_button">
                 Login
             </button>
         </form>

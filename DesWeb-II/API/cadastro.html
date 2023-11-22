@@ -1,3 +1,33 @@
+<script>
+    function cadastrar(){
+        const name = document.querySelector("#name").value;
+        const email = document.querySelector("#email").value;
+        const senha  = document.querySelector("#senha").value;
+        dados = {
+            name: name,
+            email: email,
+            senha: senha
+        }
+
+        console.log(dados)
+
+        fetch('/cadastro', {
+            method:'POST', 
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+        .then(Response => Response.json)
+        .then(data => {
+            console.log('Resposta da API', data)
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API:', error);
+        });
+    }
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,14 +69,13 @@
                 </div>
 
                 <div class="input-box">
-                    <label for="password">
+                    <label for="senha">
                         Senha
                         <div class="input-field">
                             <i class="fa-solid fa-key"></i>
-                            <input type="password" id="password" name="password">
+                            <input type="password" id="senha" name="senha">
                         </div>
                     </label>
-                    
                     <div id="already_account">
                         <a id="login" href="/login">
                             Já possui uma conta ?
@@ -55,7 +84,7 @@
                 </div>
             </div>
 
-            <button type="submit" id="register_button">
+            <button onclick="cadastrar()" type="submit" id="register_button">
                 Cadastro 
             </button>
         </form>

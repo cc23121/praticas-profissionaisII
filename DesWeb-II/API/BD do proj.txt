@@ -1,8 +1,0 @@
-Insert into PrismaCategoryMat values ('papelaria', getDate()),
-Insert into PrismaCategoruMat values ('Artesanato', getDate()),
-
-
-
-select * from PrismaProductMat
-insert into PrismaProductMat values('caderno', 30.00, 1 ,getDate())
-insert into PrismaProductMat values('lapis', 5.00, 1 ,getDate())

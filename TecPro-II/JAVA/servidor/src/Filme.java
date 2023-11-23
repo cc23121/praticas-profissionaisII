@@ -17,9 +17,7 @@ public class Filme {
                 this.anoLancamento = anoLancamento;
             }
             this.sinopse = sinopse;
-            if (nota <= 10 || nota >= 0){
-                this.nota = nota;
-            }
+            setNota(nota);
             this.url_foto = url_foto;
 
         }
@@ -31,25 +29,23 @@ public class Filme {
                 this.anoLancamento = anoLancamento;
             }
             this.sinopse = sinopse;
-            if (nota <= 10 || nota >= 0){
-                this.nota = nota;
-            }
+            setNota(nota);
             this.url_foto = url_foto;
 
         }
 
 
-    public int getIdFilme() {
-        return idFilme;
-    }
-
-    public void setIdFilme(int idFilme) {
-        this.idFilme = idFilme;
-    }
-
-    public String getTitulo() {
-            return titulo;
+        public int getIdFilme() {
+            return idFilme;
         }
+
+        public void setIdFilme(int idFilme) {
+            this.idFilme = idFilme;
+        }
+
+        public String getTitulo() {
+                return titulo;
+            }
 
         public void setTitulo(String titulo) {
             this.titulo = titulo;
@@ -84,16 +80,18 @@ public class Filme {
             return nota;
         }
 
-    public String getUrl_foto() {
-        return url_foto;
-    }
+        public String getUrl_foto() {
+            return url_foto;
+        }
 
-    public void setUrl_foto(String url_foto) {
-        this.url_foto = url_foto;
-    }
+        public void setUrl_foto(String url_foto) {
+            this.url_foto = url_foto;
+        }
 
-    public void setNota(float nota) {
-            this.nota = nota;
+        public void setNota(float nota) {
+            if (nota <= 10 || nota >= 0){
+                this.nota = nota;
+            }
         }
 
         @Override

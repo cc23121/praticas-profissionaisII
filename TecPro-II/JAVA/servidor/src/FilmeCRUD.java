@@ -82,7 +82,6 @@ public class FilmeCRUD extends JFrame {
         formularioPanel.add(new JScrollPane(sinopseTextArea = new JTextArea()));
         formularioPanel.add(new JLabel("Nota:"));
         formularioPanel.add(notaTextField = new JTextField());
-
         formularioPanel.add(new JLabel("Url Foto:"));
         formularioPanel.add(urlFotoTextField = new JTextField());
 

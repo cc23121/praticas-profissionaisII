@@ -4,6 +4,7 @@ const path = require('path');
 
 // Rota para servir a página HTML
 exports.getIndex = ('/', (req, res) => {
+  console.log("entrou")
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
@@ -20,34 +21,38 @@ exports.getCards = ('/cards', (req, res) => {
 });
 
 exports.getPaginaCad = ('/paginacadastro', (req, res) => {
+  console.log("entrou pagina cadastro")
   res.sendFile(path.join(__dirname, '../cadastro.html'));
 });
 
 exports.getPaginaLog = ('/paginalogin', (req, res) => {
+  console.log("entrou pagina log")
   res.sendFile(path.join(__dirname, '../login.html'));
 });
 
 exports.postLog = ('/login', (req, res) => {
   const { email, senha } = req.body;
-  db.query(`SELECT * FROM praticas2.usuario WHERE email = ${email} AND senha = ${senha}}'`,
-  
-  (err, results) => {
-    console.log("deu");
-    if (err) {
-      res.status(500).send('Erro ao realizar o login');
-    } else {
-      if (results.length > 0) {
-        res.status(200).send('Login bem-sucedido');
+  console.log(req.body);
+
+  db.query(`SELECT * FROM praticas2.usuario WHERE email = '${email}' AND senha = '${senha}'`, //substituir pela SP de
+    (err, results) => {
+      console.log("deu");
+
+      if (err) {
+        window.alert("Erro ao realizar Login")
+        console.log("Deu erro");
       } else {
-        res.status(401).send('Credenciais inválidas');
+        console.log("Deu CERTO");
       }
     }
-  });
-  console.log("deu2")
+  )
+  res.redirect('/');
 });
+
 
 //Rota para Cadastro
 exports.postCad = ('/cadastro', (req, res) => {
+  console.log("entrou func cad")
   const {name, email, senha} = req.body;
   console.log(name);
 

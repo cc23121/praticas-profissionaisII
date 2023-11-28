@@ -4,7 +4,6 @@ const path = require('path');
 
 // Rota para servir a página HTML
 exports.getIndex = ('/', (req, res) => {
-  console.log("entrou")
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
@@ -39,7 +38,7 @@ exports.postLog = ('/login', (req, res) => {
       console.log("deu");
 
       if (err) {
-        window.alert("Erro ao realizar Login")
+        
         console.log("Deu erro");
       } else {
         console.log("Deu CERTO");

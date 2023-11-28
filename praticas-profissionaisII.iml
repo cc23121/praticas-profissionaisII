@@ -7,6 +7,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="sqljdbc_12.4.2.0_ptb" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/TecPro-II/JAVA/JDBC/sqljdbc_12.4/ptb/jars" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/TecPro-II/JAVA/JDBC/sqljdbc_12.4/ptb/jars" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/TecPro-II/JAVA/JDBC/sqljdbc_12.4/ptb/jars" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/TecPro-II/JAVA/JDBC/sqljdbc_12.4/ptb/jars" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>

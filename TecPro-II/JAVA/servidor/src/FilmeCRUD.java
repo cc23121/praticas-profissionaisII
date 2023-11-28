@@ -33,7 +33,6 @@ public class FilmeCRUD extends JFrame {
         filmeList = new JList<>(listModel);
 
 
-
         JButton adicionarButton = new JButton("Adicionar");
         JButton editarButton = new JButton("Editar");
         JButton removerButton = new JButton("Remover");
@@ -129,7 +128,7 @@ public class FilmeCRUD extends JFrame {
     private void atualizarListModel() {
         DefaultListModel<String> newListModel = new DefaultListModel<>();
 
-        String sql = "SELECT Titulo FROM PRATICAS2.filme";
+        String sql = "SELECT Titulo FROM PRATICAS2.ViewFilmes ORDER BY Titulo ASC";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();

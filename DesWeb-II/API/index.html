@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
     <title>CineCritique</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header id="barraP">
-        <nav>
-            <div class="nav-logo">
-                <!-- Se você quiser adicionar um logotipo, coloque-o aqui -->
-            </div>
+        <nav class="menu-principal">
             <ul class="nav-links">
                 <li class="link" onclick="irParaALista()"><a href="#">Listagem de Filmes</a></li>
                 <li id="link1" class="link" onclick="irParaRedesSociais()"><a href="#">Redes Sociais</a></li>
@@ -213,36 +209,26 @@ a {
 }
 
 nav {
-    max-width: 1100px;
     margin: auto;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
 }
 
-.nav-logo {
-    max-width: 100px;
+.menu-principal{
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 3rem;
 }
 
-.nav-left {
-    flex: 1; /* Ocupa o máximo de espaço possível à esquerda */
-    display: flex;
-    align-items: center;
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espaçamento entre os botões */
-    justify-content: flex-end; /* Alinha os botões à direita */
-}
 
 .link a {
     position: relative;

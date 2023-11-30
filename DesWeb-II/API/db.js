@@ -21,4 +21,4 @@ pool.connect()
     console.error('Erro de conexão com o SQL Server:', err);
   });
 
-module.exports = pool;
+module.exports = pool, sql;

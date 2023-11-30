@@ -1,13 +1,13 @@
 const db = require('../db');
 const path = require('path');
+const sql = require('mssql');
 
 
-// Rota para servir a página HTML
 exports.getIndex = ('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-// Rota da API
+
 exports.getCards = ('/cards', (req, res) => {
   db.query('SELECT * FROM PRATICAS2.filme', (err, result) => {
     if (err) {
@@ -29,24 +29,33 @@ exports.getPaginaLog = ('/paginalogin', (req, res) => {
   res.sendFile(path.join(__dirname, '../login.html'));
 });
 
-exports.postLog = ('/login', (req, res) => {
+exports.postLog = ('/login', async (req, res) => {
   const { email, senha } = req.body;
   console.log(req.body);
 
-  db.query(`SELECT * FROM praticas2.usuario WHERE email = '${email}' AND senha = '${senha}'`, //substituir pela SP de
-    (err, results) => {
-      console.log("deu");
+  const request = db.request();
+  request.input('p_email', sql.VarChar(255), email);
+  request.input('p_senha', sql.VarChar(255), senha);
+  request.output('p_logado', sql.Bit);
 
-      if (err) {
-        
-        console.log("Deu erro");
-      } else {
-        console.log("Deu CERTO");
-      }
+  // Executa a stored procedure
+  const result = await request.execute('Praticas2.sp_VerificarLogin');
+
+  const logado = result.output.p_logado;
+
+
+  console.log(logado);
+  
+
+    if (logado) {
+      console.log("Usuário logado com sucesso!");
+
+    } else {
+      console.log("Credenciais inválidas. Usuário não logado.");
+      res.status(401).send("Credenciais inválidas");
     }
-  )
-  res.redirect('/');
 });
+
 
 
 //Rota para Cadastro

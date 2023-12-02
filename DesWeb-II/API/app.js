@@ -10,7 +10,7 @@ app.use(express.json())
 app.use('/',route)
 
 
-const port = 3002; 
+const port = 3000; 
 app.listen(port, () => {
   console.log(`Servidor REST API rodando na porta ${port}`);
 });

@@ -70,6 +70,7 @@
     const cardsContainer = document.getElementsByClassName('filmes');
     data.forEach(cardData => {
         const card = document.createElement('div');
+        const filmeId = cardData.filmeId;
         card.innerHTML = `
         <h4>${cardData.Titulo}</h4>
                     <img id="idFoto" src="${cardData.url_foto}">
@@ -98,8 +99,10 @@
                         <label for="star1"></label>
                     </div>
         `;
-        cardsContainer[0].appendChild(card);
         card.classList.add('card');
+        card.setAttribute('id', `filme-${filmeId}`); //Aqui eu adiciono o Id individual para cada card, o Id deve ser passado para a função que adiciona a avaliação aos filmes
+        cardsContainer[0].appendChild(card);
+       
     });
     })
     .catch(error => {

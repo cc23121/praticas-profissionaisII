@@ -1,32 +1,36 @@
 <script>
-function logar(){
+function logar() {
     const email = document.querySelector("#email").value;
-    const senha  = document.querySelector("#senha").value;
-    dados = {
+    const senha = document.querySelector("#senha").value;
+    const dados = {
         email: email,
         senha: senha
     }
 
-    console.log(dados)
+    console.log(dados);
 
     fetch('/login', {
-        method:'POST', 
-        headers:{
-            'Content-Type':'application/json'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(dados)
     })
-    .then(Response => Response.json)
-    .then(data => {
-        window.location.replace('/')
-        console.log('Resposta da API', data)
-    })
-    
-    .catch(error => {
-        console.error('Erro ao buscar dados da API:', error);
-    });
+    console.log("entrou KDAWDSAD")
+    .then(response => {
+        if (response.ok) {
+            localStorage.setItem('loggedIn', 'true');
+            console.log(localStorage)
+            console.log("entrou KDAWDSAD")
+            window.location.href = '/';
 
-}
+        } else {
+            console.error('Credenciais inválidas.');
+            window.alert('Usuario e senha não encontrados')
+        }
+    })
+    }
+
 </script>
 
 <!DOCTYPE html>

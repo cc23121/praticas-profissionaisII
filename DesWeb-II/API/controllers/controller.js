@@ -30,8 +30,7 @@ exports.getPaginaLog = ('/paginalogin', (req, res) => {
 });
 
 exports.postLog = ('/login', async (req, res) => {
-  const { email, senha } = req.body;
-  console.log(req.body);
+  const {email, senha} = req.body;
 
   const request = db.request();
   request.input('p_email', sql.VarChar(255), email);
@@ -42,10 +41,7 @@ exports.postLog = ('/login', async (req, res) => {
   const result = await request.execute('Praticas2.sp_VerificarLogin');
 
   const logado = result.output.p_logado;
-
-
   console.log(logado);
-  
 
     if (logado) {
       console.log("Usuário logado com sucesso!");

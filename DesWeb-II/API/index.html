@@ -33,14 +33,32 @@
                         <input type="radio" id="star1" name="rating" value="1">
                         <label for="star1"></label>
                     </div>`
-        card.classList.add('card');
-        card.setAttribute('id', `filme-${filmeId}`);
-        cardsContainer[0].appendChild(card);;
+            card.classList.add('card');
+            card.setAttribute('id', `filme-${filmeId}`);
+            cardsContainer[0].appendChild(card);;
+            
+        });
+        })
+        .catch(error => {
+        console.error('Erro ao buscar dados da API:', error);
     });
-    })
-    .catch(error => {
-    console.error('Erro ao buscar dados da API:', error);
-});
+
+    function verificarUsuario() {
+          
+    const usuario = localStorage.getItem('usuario');
+
+    const loginBtn = document.getElementById('loginBtn');
+    const cadastroBtn = document.getElementById('cadastroBtn');
+    const mensagem = document.getElementById('mensagem');
+
+    if (usuario) {
+        loginBtn.style.display = 'none';
+        cadastroBtn.style.display = 'none';
+        mensagem.textContent = 'Olá, ' + usuario + '!';
+        }
+    }
+
+    window.onload = verificarUsuario;
 
     function irParaRedesSociais(){
         rolarSuavemente(3000, 500)

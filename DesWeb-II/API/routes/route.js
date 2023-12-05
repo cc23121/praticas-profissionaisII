@@ -9,4 +9,5 @@ router.get('/paginalogin', controller.getPaginaLog)
 router.post('/login', controller.postLog)
 router.post('/cadastro', controller.postCad)
 
+
 module.exports = router;

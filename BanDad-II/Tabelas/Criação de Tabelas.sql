@@ -3,22 +3,16 @@ CREATE SCHEMA PRATICAS2
 CREATE TABLE PRATICAS2.usuario (
     usuarioID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     nome VARCHAR(30) NOT NULL,
-    email VARCHAR(40) NOT NULL UNIQUE,
-    senha VARCHAR(7) NOT NULL
+    email VARCHAR(40) NOT NULL,
+    senha VARCHAR(9) NOT NULL
 );
+
+
 
 CREATE TABLE PRATICAS2.administrador (
     admID INT IDENTITY(1,1) PRIMARY KEY,
+	nome VARCHAR(30) NOT NULL,
     senha VARCHAR(7) not null,
-);
-
-CREATE TABLE PRATICAS2.filme (
-    idFilme INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    Titulo VARCHAR(60) NOT NULL,
-    diretor VARCHAR(60),
-    Ano INT,
-    sinopse TEXT,
-	nota FLOAT,
 );
 
 

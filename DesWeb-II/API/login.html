@@ -1,36 +1,40 @@
 <script>
-function logar() {
-    const email = document.querySelector("#email").value;
-    const senha = document.querySelector("#senha").value;
-    const dados = {
-        email: email,
-        senha: senha
-    }
-
-    console.log(dados);
-
-    fetch('/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
-    })
-    console.log("entrou KDAWDSAD")
-    .then(response => {
-        if (response.ok) {
-            localStorage.setItem('loggedIn', 'true');
-            console.log(localStorage)
-            console.log("entrou KDAWDSAD")
-            window.location.href = '/';
-
-        } else {
-            console.error('Credenciais inválidas.');
-            window.alert('Usuario e senha não encontrados')
+    function logar() {
+        const email = document.querySelector("#email").value;
+        const senha = document.querySelector("#senha").value;
+        const dados = {
+            email: email,
+            senha: senha
         }
-    })
-    }
 
+        console.log(dados);
+
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+        .then(response => {
+            console.log("entroulog");
+            if (response.ok) {
+                localStorage.setItem('loggedIn', 'true');
+                console.log(localStorage);
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 2000);
+                
+
+            } else {
+                console.error('Credenciais inválidas.');
+                window.alert('Usuário e senha não encontrados');
+            }
+        })
+        .catch(error => {
+            window.alert('Erro ao fazer login');
+        });
+        }       
 </script>
 
 <!DOCTYPE html>
@@ -79,7 +83,7 @@ function logar() {
                 </div>
             </div>
 
-            <button onclick="logar();event.preventDefault()" type="submit" id="login_button">
+            <button onclick="logar();" type="submit" id="login_button">
                 Login
             </button>
         </form>

@@ -1,4 +1,5 @@
 <script>
+    console.log(localStorage)
     fetch('/cards')
     .then(response => response.json())
     .then(data => {
@@ -44,69 +45,44 @@
     });
 
     function verificarUsuario() {
-          
-    const usuario = localStorage.getItem('usuario');
+        if (localStorage.getItem('loggedIn') === 'true') {
+            const email = String(localStorage.getItem('Email'));
+            const senha = String(localStorage.getItem('Senha'));
+            
+            console.log(email, senha)
+            
+            fetch(`/username?p_email='${email}'&p_senha='${senha}'`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Nome do usuário:', data.nome);
 
-    const loginBtn = document.getElementById('loginBtn');
-    const cadastroBtn = document.getElementById('cadastroBtn');
-    const mensagem = document.getElementById('mensagem');
+                const usuario = data.nome;
+                const loginBtn = document.querySelectorAll('#btnLogin');
+                const cadastroBtn = document.querySelectorAll('#btnCadastro');
+                const mensagem = document.getElementById('mensagem');
 
-    if (usuario) {
-        loginBtn.style.display = 'none';
-        cadastroBtn.style.display = 'none';
-        mensagem.textContent = 'Olá, ' + usuario + '!';
-        }
+                if (usuario) {
+                    loginBtn.style.display = 'none';
+                    cadastroBtn.style.display = 'none';
+                    mensagem.textContent = 'Olá, ' + usuario + '!';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao obter o nome do usuário:', error);
+            });
+    }
     }
 
-    window.onload = verificarUsuario;
+window.onload = verificarUsuario;
 
-    function irParaRedesSociais(){
-        rolarSuavemente(3000, 500)
-    }
-
-
-    function irParaALista(){
-        rolarSuavemente(1130, 300)
-    }
-
-    function irParaTopo(){
-        rolarSuavemente(0, 300)
-    }
-
-
-    function rolarSuavemente(destino, duracao){
-        const inicio = window.pageYOffset;
-        const distancia = destino - inicio
-        const passos = 50; // Número de etapas na animação
-        const intervalo = duracao / passos;
-        let etapa = 0;
-
-        function animarScroll() {
-            etapa++;
-            const progresso = etapa / passos;
-            const deslocamento = inicio + distancia * progresso;
-            window.scrollTo(0, deslocamento);
-
-            if (etapa < passos) {
-                setTimeout(animarScroll, intervalo);
-            }
-        }
-        animarScroll();
-    }
-
-    const ratingInputs = document.querySelectorAll('input[name="rating"]');
-    let selectedRating = 0;
-
-    ratingInputs.forEach(input => {
-        input.addEventListener('change', (event) => {
-            selectedRating = parseInt(event.target.value);
-            alert(`Classificação selecionada: ${selectedRating}`);
-        });
-    });
 </script>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,22 +98,23 @@
                 <li id="link1" class="link" onclick="irParaRedesSociais()"><a href="#">Redes Sociais</a></li>
             </ul>
             <div class="user-buttons">
-                <a href="/paginalogin"><button class="btn">Login</button></a>
-                <a href="/paginacadastro"><button class="btn">Cadastro</button></a>
+                <a href="/paginalogin"><button id="btnLogin" class="btn">Login</button></a>
+                <a href="/paginacadastro"><button id="btnCadastro" class="btn">Cadastro</button></a>
             </div>
         </nav>
     </header>
 
     <header class="container" >
         <div class="content">
-    
+
             <H1>Bem-vindo ao CineCritique!</H1>
             <p>
                 CineCritique é website online para avaliar e os filmes. 
                 Nossa missão é fornecer a você informações os filmes que você ama. 
                 Explore nosso catálogo, Seja um cinéfilo informado e faça parte da nossa comunidade sobre cinema. 
                 Junte-se a nós e comece a sua jornada de descoberta cinematográfica!
-            </p> <br>        
+            </p> 
+            <br>        
             <button class="btn" onclick="irParaALista()">Começar!</button>
         </div>
     </header>

@@ -19,8 +19,14 @@
             body: JSON.stringify(dados)
         })
         .then(response => {
-            window.location.href = "/paginalogin";
-        })
+          if (response.ok) {
+                localStorage.setItem('Email', email);
+                localStorage.setItem('Senha', senha);
+                localStorage.setItem('Nome', name);
+                console.log(localStorage);
+                window.location.href = "/paginalogin";
+        }
+    })
         .then(data => {
             console.log('Resposta da API', data)
         })

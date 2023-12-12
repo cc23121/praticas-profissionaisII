@@ -11,8 +11,8 @@ public class FilmeCRUD extends JFrame {
     private final Connection connection; // Variável de instância para a conexão JDBC
 
 
-    private final List<Filme> filmes;
-    private DefaultListModel<String> listModel; //entender como funciona o array de string
+    private final List<Filme> filmes; //tipo de array <!>
+    private DefaultListModel<String> listModel;
     private final JList<String> filmeList;
 
     private final JTextField tituloTextField;

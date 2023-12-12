@@ -1,5 +1,4 @@
 <script>
-
     function logar() {
         const email = document.querySelector("#email").value;
         const senha = document.querySelector("#senha").value;
@@ -19,19 +18,15 @@
         })
         .then(response => {
             console.log("entroulog");
-            const nome = pegarNome(email, senha)
-            console.log(nome)
             if (response.ok) {
                 localStorage.setItem('loggedIn', 'true');
-                localStorage.setItem('Usuario', nome);
-
+                localStorage.setItem('Email', email);
+                localStorage.setItem('Senha', senha);
                 console.log(localStorage);
-                console.log("entrou");
-                setTimeout(function() {
-                    window.location.href = "/";
-                }, 8000);
+                window.location.href = "/";
+            ''
+            console.log(localStorage)
                 
-
             } else {
                 console.error('Credenciais inválidas.');
                 window.alert('Usuário e senha não encontrados');
@@ -41,6 +36,7 @@
             window.alert('Erro ao fazer login');
         });
         }       
+
 </script>
 
 <!DOCTYPE html>
@@ -75,7 +71,7 @@
                         Senha
                         <div class="input-field">
                             <i class="fa-solid fa-key"></i>
-                            <input type="senha" id="senha" name="senha">
+                            <input type="password" id="senha" name="senha">
                         </div>
                     </label>
                     

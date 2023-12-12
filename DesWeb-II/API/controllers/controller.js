@@ -2,32 +2,6 @@ const db = require('../db');
 const path = require('path');
 const sql = require('mssql');
 
-async function pegarNome(email, senha) {
-  const request = db.request();
-
-  request.input('p_email', sql.VarChar(255), email);
-  request.input('p_senha', sql.VarChar(255), senha);
-  request.output('p_resultado', sql.VarChar(30));
-
-  try {
-      const result = await request.execute('Praticas2.sp_VerificarLogin');
-      const resultado = result.output.p_resultado;
-      console.log(resultado);
-
-      if (resultado !== 'Credenciais inválidas') {
-          // As credenciais estão corretas, 'resultado' contém o nome
-          console.log('Usuário logado com sucesso! Nome:', resultado);
-          return resultado;
-      } else {
-          
-          console.error(resultado);
-          return null;
-      }
-  } catch (error) {
-      console.error(error);
-      return null;
-  }
-}
 
 
 exports.getIndex = ('/', (req, res) => {
@@ -74,7 +48,7 @@ exports.postCad = ('/cadastro', (req, res) => {
         res.status(500).json({ error: 'Erro interno do servidor' });
       } else {
         console.log("Cadastro realizado com sucesso!");
-        res.redirect('/z');
+        res.redirect('/');
       }
     }
   );
@@ -85,9 +59,8 @@ exports.postCad = ('/cadastro', (req, res) => {
 
 exports.postLog = ('/login', async(req, res) => {
   const { email, senha } = req.body;
-  
-
   const request = db.request();
+
   request.input('p_email', sql.VarChar(255), email);
   request.input('p_senha', sql.VarChar(255), senha);
   request.output('p_logado', sql.Bit);
@@ -106,9 +79,38 @@ exports.postLog = ('/login', async(req, res) => {
       console.log("Credenciais inválidas. Usuário não logado.");
       res.status(401).send("Credenciais inválidas");
     }
+
   } catch (error) {
     console.error("Erro ao executar a stored procedure:", error);
     res.status(500).send("Erro interno do servidor");
   }
 });
 
+
+exports.postNome = ('/nome', async(req, res) =>{
+  const { email, senha } = req.body;
+
+  const request = db.request();
+
+  request.input('p_email', sql.VarChar(255), email);
+  request.input('p_senha', sql.VarChar(255), senha);
+  request.output('p_resultado', sql.VarChar(30));
+
+  try {
+      const result = await request.execute('Praticas2.sp_VerificarNome');
+      const resultado = result.output.p_resultado;
+      console.log(resultado);
+
+      if (resultado !== 'Credenciais inválidas') {
+          console.log('Usuário logado com sucesso! Nome:', resultado);
+          return resultado;
+      } else {
+          
+          console.error(resultado);
+          return null;
+      }
+  } catch (error) {
+      console.error(error);
+      return null;
+  }
+});

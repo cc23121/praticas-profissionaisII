@@ -1,9 +1,10 @@
 <script>
+    console.log(localStorage)
     fetch('/cards')
     .then(response => response.json())
     .then(data => {
     const cardsContainer = document.getElementsByClassName('filmes');
-    data.forEach(cardData => {
+    data.forEach(cardData => { //para cada objeto no json
         const card = document.createElement('div');
         const filmeId = cardData.filmeId;
         card.innerHTML = `
@@ -21,16 +22,16 @@
                     <p>Nota:</p>
                     <label for="nota">${cardData.nota}</label>
 
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5">
+                    <div class="avaliacao">
+                        <input type="radio" id="star5" name="avaliacao" value="5">
                         <label for="star5"></label>
-                        <input type="radio" id="star4" name="rating" value="4">
+                        <input type="radio" id="star4" name="avaliacao" value="4">
                         <label for="star4"></label>
-                        <input type="radio" id="star3" name="rating" value="3">
+                        <input type="radio" id="star3" name="avaliacao" value="3">
                         <label for="star3"></label>
-                        <input type="radio" id="star2" name="rating" value="2">
+                        <input type="radio" id="star2" name="avaliacao" value="2">
                         <label for="star2"></label>
-                        <input type="radio" id="star1" name="rating" value="1">
+                        <input type="radio" id="star1" name="avaliacao" value="1">
                         <label for="star1"></label>
                     </div>`
             card.classList.add('card');
@@ -43,34 +44,36 @@
         console.error('Erro ao buscar dados da API:', error);
     });
 
-    function verificarUsuario() {
-          
-    const usuario = localStorage.getItem('usuario');
+    function verificalogado() {
+        
+        console.log("entrou verifica")
+        const logado = localStorage.getItem('loggedIn');
+        const nome = localStorage.getItem('Nome'); 
+        
+        const loginBtn = document.getElementById('loginBtn');
+        const cadastroBtn = document.getElementById('cadastroBtn');
+        const mensagem = document.getElementById('mensagem');
 
-    const loginBtn = document.getElementById('loginBtn');
-    const cadastroBtn = document.getElementById('cadastroBtn');
-    const mensagem = document.getElementById('mensagem');
-
-    if (usuario) {
-        loginBtn.style.display = 'none';
-        cadastroBtn.style.display = 'none';
-        mensagem.textContent = 'Olá, ' + usuario + '!';
+        if (logado) {
+            loginBtn.style.display = 'none';
+            cadastroBtn.style.display = 'none';
+            mensagem.textContent = 'Olá, ' + nome + '!';
         }
     }
 
-    window.onload = verificarUsuario;
+    window.onload = verificalogado;
 
     function irParaRedesSociais(){
-        rolarSuavemente(3000, 500)
+        rolarSuavemente(3000, 100)
     }
 
 
     function irParaALista(){
-        rolarSuavemente(1130, 300)
+        rolarSuavemente(1130, 100)
     }
 
     function irParaTopo(){
-        rolarSuavemente(0, 300)
+        rolarSuavemente(0, 100)
     }
 
 
@@ -94,13 +97,13 @@
         animarScroll();
     }
 
-    const ratingInputs = document.querySelectorAll('input[name="rating"]');
-    let selectedRating = 0;
+    const avaliacaoInputs = document.querySelectorAll('input[name="avaliacao"]');
+    let selectedavaliacao = 0;
 
-    ratingInputs.forEach(input => {
+    avaliacaoInputs.forEach(input => {
         input.addEventListener('change', (event) => {
-            selectedRating = parseInt(event.target.value);
-            alert(`Classificação selecionada: ${selectedRating}`);
+            selectedavaliacao = parseInt(event.target.value);
+            alert(`Classificação selecionada: ${selectedavaliacao}`);
         });
     });
 </script>
@@ -122,8 +125,9 @@
                 <li id="link1" class="link" onclick="irParaRedesSociais()"><a href="#">Redes Sociais</a></li>
             </ul>
             <div class="user-buttons">
-                <a href="/paginalogin"><button class="btn">Login</button></a>
-                <a href="/paginacadastro"><button class="btn">Cadastro</button></a>
+                <a href="/paginalogin"><button id="loginBtn" class="btn">Login</button></a>
+                <a href="/paginacadastro"><button id="cadastroBtn" class="btn">Cadastro</button></a>
+                <p id="mensagem"></p>
             </div>
         </nav>
     </header>
@@ -240,6 +244,10 @@ nav {
     width: 94%;
     display: flex;
     justify-content: space-between;
+}
+#mensagem{
+    font-size: larger;
+    color: white;
 }
 
 .nav-links {
@@ -456,24 +464,24 @@ section .header{
     color: #1e40af;
 }
 
-.rating {
+.avaliacao {
     direction: rtl; 
 }
-.rating input {
+.avaliacao input {
     display: none;
 }
 
-.rating label {
+.avaliacao label {
     cursor: pointer;
 }
 
-.rating label:before {
+.avaliacao label:before {
     content: "\2605";
     font-size: 2rem;
     color: #ccc;
 }
 
-.rating input:checked ~ label:before {
+.avaliacao input:checked ~ label:before {
     color: #ffdd00; /* Cor amarela para estrelas selecionadas */
 }
 

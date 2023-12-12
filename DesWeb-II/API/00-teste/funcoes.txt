@@ -1,0 +1,55 @@
+      /*fetch('/nome', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dados),
+            })
+            .then((response) => {
+                console.log("entrouPegaNome");
+                console.log(data)
+            
+                if (response.ok) {
+                    return response.json(); // Parse a resposta JSON
+                } else {
+                    throw new Error('Nome de usuário não encontrado');
+                }
+            })
+            .then((data) => {
+                const nome = data.nome;
+                localStorage.setItem('Nome', nome);
+                console.log('Nome de usuário encontrado: ' + nome);
+            })
+            .catch((error) => {
+                console.error('Erro:', error.message);
+            });*/
+
+
+
+fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+        .then(response => {
+            console.log("entroulog");
+            if (response.ok) {
+                localStorage.setItem('loggedIn', 'true');
+                localStorage.setItem('Email', email);
+                localStorage.setItem('Senha', senha);
+                console.log(localStorage);
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 2000);
+                
+            } else {
+                console.error('Credenciais inválidas.');
+                window.alert('Usuário e senha não encontrados');
+            }
+        })
+        .catch(error => {
+            window.alert('Erro ao fazer login' + error);
+        });
+        }    

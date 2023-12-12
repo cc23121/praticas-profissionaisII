@@ -6,7 +6,6 @@
             email: email,
             senha: senha
         }
-
         console.log(dados);
 
         fetch('/login', {
@@ -17,23 +16,29 @@
             body: JSON.stringify(dados)
         })
         .then(response => {
+            console.log(response)
             console.log("entroulog");
             if (response.ok) {
                 localStorage.setItem('loggedIn', 'true');
                 localStorage.setItem('Email', email);
                 localStorage.setItem('Senha', senha);
                 console.log(localStorage);
-                window.location.href = "/";
-            ''
-            console.log(localStorage)
+                console.log("entrou");
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 8000);
                 
+
             } else {
                 console.error('Credenciais inválidas.');
                 window.alert('Usuário e senha não encontrados');
             }
         })
+        .then(data => {
+            console.log('data:' + data)
+        })
         .catch(error => {
-            window.alert('Erro ao fazer login');
+            window.alert('Erro ao fazer login' + error);
         });
         }       
 
@@ -84,7 +89,7 @@
                 </div>
             </div>
 
-            <button onclick="logar();" type="submit" id="login_button">
+            <button onclick="logar(event)" type="submit" id="login_button">
                 Login
             </button>
         </form>
